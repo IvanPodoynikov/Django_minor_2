@@ -1,0 +1,14 @@
+{% extends 'eduapp/base.html' %}
+{% load static %}
+{% block title %}Новая запись{% endblock %}
+
+{% block content %}
+<h2>Новая запись</h2>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="padding:6px 12px; background:#4CAF50; color:white; border:none; border-radius:4px;">
+        Сохранить
+    </button>
+</form>
+{% endblock %}

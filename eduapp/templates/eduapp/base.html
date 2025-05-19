@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Обучение в Вышке – {% block title %}{% endblock %}</title>
+
+  <!-- Встроенные стили для навигации -->
+  <style>
+    /* Сброс отступов и базовые настройки */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #4CAF50;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      margin: 0;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: #45a049;
+    }
+
+    nav .active a {
+      background-color: #367c39;
+    }
+
+    main {
+      padding: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #f4f4f4;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li class="{% if request.resolver_match.url_name == 'about_me' %}active{% endif %}">
+          <a href="{% url 'about_me' %}">Я</a>
+        </li>
+        <li class="{% if request.resolver_match.url_name == 'entry_list' %}active{% endif %}">
+          <a href="{% url 'entry_list' %}">Список</a>
+        </li>
+        <li class="{% if request.resolver_match.url_name == 'entry_create' %}active{% endif %}">
+          <a href="{% url 'entry_create' %}">Новый элемент</a>
+        </li>
+        <li class="{% if request.resolver_match.url_name == 'entry_stats' %}active{% endif %}">
+          <a href="{% url 'entry_stats' %}">Статистика</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; {{ now|date:"Y" }} Обучение в Вышке</p>
+  </footer>
+</body>
+</html>

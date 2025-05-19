@@ -1,0 +1,9 @@
+{% extends 'eduapp/base.html' %}
+{% load static %}
+{% block title %}Я{% endblock %}
+{% block content %}
+<h2>{{ full_name }}</h2>
+<img src="{% static photo_url %}" alt="Фото" width="200">
+<p>E-mail: <a href="mailto:{{ email }}">{{ email }}</a></p>
+<p>Телефон: {{ phone }}</p>
+{% endblock %}

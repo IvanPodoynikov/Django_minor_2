@@ -1,0 +1,52 @@
+{% extends 'eduapp/base.html' %}
+{% load static %}
+{% block title %}Список записей{% endblock %}
+
+{% block content %}
+<h2>Список записей</h2>
+
+<form method="get" style="margin-bottom:1em;">
+    <input type="text" name="name" placeholder="По фамилии или имени"
+           value="{{ request.GET.name }}" style="padding:4px 8px; margin-right:0.5em;">
+    <select name="program" style="padding:4px 8px; margin-right:0.5em;">
+        <option value="">Все программы</option>
+        <option value="math" {% if request.GET.program == 'math' %}selected{% endif %}>Математика</option>
+        <option value="sovbak" {% if request.GET.program == 'sovbak' %}selected{% endif %}>СовБак</option>
+    </select>
+    <select name="order" style="padding:4px 8px; margin-right:0.5em;">
+        <option value="date" {% if request.GET.order == 'date' %}selected{% endif %}>По дате</option>
+        <option value="last_name" {% if request.GET.order == 'last_name' %}selected{% endif %}>По фамилии</option>
+        <option value="score" {% if request.GET.order == 'score' %}selected{% endif %}>По баллу</option>
+    </select>
+    <button type="submit" style="padding:4px 8px;">Применить</button>
+</form>
+
+<table style="width:100%; border-collapse: collapse; margin-top:1em;">
+    <thead>
+        <tr style="background:#4CAF50; color:white;">
+            <th style="padding:8px; text-align:left;">Фамилия</th>
+            <th style="padding:8px; text-align:left;">Имя</th>
+            <th style="padding:8px; text-align:left;">Программа</th>
+            <th style="padding:8px; text-align:left;">E-mail</th>
+            <th style="padding:8px; text-align:left;">Телефон</th>
+            <th style="padding:8px; text-align:left;">Баллы</th>
+            <th style="padding:8px; text-align:left;">Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for e in entries %}
+        <tr {% if forloop.counter0|divisibleby:2 %}style="background:#f9f9f9;"{% endif %}>
+            <td style="padding:8px;">{{ e.last_name }}</td>
+            <td style="padding:8px;">{{ e.first_name }}</td>
+            <td style="padding:8px;">{{ e.get_program_display }}</td>
+            <td style="padding:8px;">{{ e.email }}</td>
+            <td style="padding:8px;">{{ e.phone }}</td>
+            <td style="padding:8px;">{{ e.score }}</td>
+            <td style="padding:8px;">{{ e.date }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="7" style="text-align:center; padding:8px;">Нет записей</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

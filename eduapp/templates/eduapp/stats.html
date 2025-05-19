@@ -1,0 +1,35 @@
+{% extends 'eduapp/base.html' %}
+{% load static %}
+
+{% block title %}Статистика{% endblock %}
+
+{% block content %}
+<h2>Распределение по баллам</h2>
+
+<table style="border-collapse: collapse; width: 300px; margin-top:1em;">
+  <thead>
+    <tr style="background:#2196F3; color:white;">
+      <th style="padding:6px; text-align:left;">Балл</th>
+      <th style="padding:6px; text-align:left;">Количество</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in stats %}
+      <tr>
+        <td style="padding:6px; border:1px solid #ddd;">{{ s.score }}</td>
+        <td style="padding:6px; border:1px solid #ddd;">{{ s.count }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="2" style="padding:6px; text-align:center;">Нет данных</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p style="margin-top:1em;">
+  <a href="{% url 'entry_list' %}" style="padding:6px 12px; background:#4CAF50; color:white; text-decoration:none; border-radius:4px;">
+    Вернуться к списку записей
+  </a>
+</p>
+{% endblock %}
