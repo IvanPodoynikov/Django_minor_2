@@ -57,12 +57,45 @@ def entry_stats(request):
         'stats': stats,
     })
 
+ABOUT_DATA = {
+    "education_link": "https://github.com/vmarshirov/WebApplicationsDevelopment/blob/main/task2/education.txt",
+    "my_info": {
+        "fio": "Подойников Иван Александрович",
+        "photo": "images/maxresdefault.jpg",     # лежит в static/images/maxresdefault.jpg
+        "email": "podoynikov@example.com",
+        "phone": "+7 (953) 456-78-90"
+    },
+    "program_info": {
+        "name": "Математика",
+        "description": "Математика",
+        "link": "https://math.hse.ru",
+        "director": {
+            "fio": "Скрипченко Александра Сергеевна",
+            "photo": "images/decan.jpg",
+            "email": "skripchenko@example.com"
+        },
+        "manager": {
+            "fio": "Иванова Татьяна Сергеевна",
+            "photo": "images/manager.jpg",
+            "email": "ivanovats@example.com"
+        }
+    },
+    "classmates": [
+        {
+            "name": "Яковчук Николай Павлович",
+            "photo": "images/kolya.jpg",
+            "email": "yakovchuk@example.com",
+            "phone": "+7 (111) 111-11-11"
+        },
+        {
+            "name": "Шатов Савва Глебович",
+            "photo": "images/savva.jpg",
+            "email": "shatov@example.com",
+            "phone": "+7 (000) 000-00-00"
+        }
+    ]
+}
+
 def about_me(request):
-    context = {
-        'full_name': 'Иван Подойников',
-        'photo_url': 'images/me.jpg',  # убрали "static/"
-        'email': 'ivan@example.com',
-        'phone': '+7 (123) 456-78-90'
-    }
-    return render(request, 'eduapp/about_me.html', context)
+    return render(request, 'eduapp/about_me.html', ABOUT_DATA)
 

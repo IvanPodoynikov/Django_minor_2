@@ -1,9 +1,69 @@
 {% extends 'eduapp/base.html' %}
 {% load static %}
-{% block title %}Я{% endblock %}
+
+{% block title %}О проекте{% endblock %}
+
 {% block content %}
-<h2>{{ full_name }}</h2>
-<img src="{% static photo_url %}" alt="Фото" width="200">
-<p>E-mail: <a href="mailto:{{ email }}">{{ email }}</a></p>
-<p>Телефон: {{ phone }}</p>
+<h1>О проекте</h1>
+
+<!-- Ссылка на требования -->
+<p>
+    <strong>Ссылка на требования:</strong>
+    <a href="{{ education_link }}" target="_blank">{{ education_link }}</a>
+  </p>
+  
+  <!-- Вот здесь добавляем id="myself" -->
+  <h2 id="myself">Я и моя образовательная программа</h2>
+  
+  <!-- Данные обо мне -->
+  <h3>Обо мне</h3>
+  <p><strong>ФИО:</strong> {{ my_info.fio }}</p>
+
+  <!-- Контакты -->
+<p><strong>Контакты для связи:</strong>
+    <!-- Ссылка на почту -->
+    <a href="mailto:{{ my_info.email }}" style="margin-left: 10px;">
+      <img src="{% static 'images/envelope.png' %}" alt="Email" style="height: 24px; margin-right: 10px;">
+    </a>
+    <!-- Ссылка на Telegram -->
+    <a href="https://t.me/ipodoynikov" target="_blank">
+      <img src="{% static 'images/telegram.png' %}" alt="Telegram" style="height: 24px;">
+    </a>
+  </p>
+
+<h3>Название программы</h3>
+<p>{{ program_info.name }}</p>
+
+<h3>Описание программы</h3>
+<p>{{ program_info.description }}</p>
+
+<h3>
+    <strong>Ссылка на программу:</strong>
+    <a href="{{ program_info.link }}" target="_blank"><p>Ссылка</p></a>
+</h3>
+
+<h4>Руководитель</h4>
+<p><strong>ФИО:</strong> {{ program_info.director.fio }}</p>
+<p><strong>Фото:</strong></p>
+<img src="{% static program_info.director.photo %}" alt="{{ program_info.director.fio }}" style="max-width: 150px;">
+<p><strong>Электронная почта:</strong> {{ program_info.director.email }}</p>
+
+<h4>Менеджер</h4>
+<p><strong>ФИО:</strong> {{ program_info.manager.fio }}</p>
+<p><strong>Фото:</strong></p>
+<img src="{% static program_info.manager.photo %}" alt="{{ program_info.manager.fio }}" style="max-width: 150px;">
+<p><strong>Электронная почта:</strong> {{ program_info.manager.email }}</p>
+
+<h3>Мои сокурсники</h3>
+<ul>
+  {% for mate in classmates %}
+    <li style="margin-bottom: 20px;">
+      <p><strong>Имя:</strong> {{ mate.name }}</p>
+      <p><strong>Фото:</strong></p>
+      <img src="{% static mate.photo %}" alt="{{ mate.name }}" style="max-width: 150px;">
+      <p><strong>Электронная почта:</strong> {{ mate.email }}</p>
+      <p><strong>Телефон:</strong> {{ mate.phone }}</p>
+    </li>
+  {% endfor %}
+</ul>
 {% endblock %}
