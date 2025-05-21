@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,9 @@ SECRET_KEY = 'django-insecure-ql!=3%m$b!_09+@emrbchd&32-la%zxwlw8y=%yat7x&erust1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'
+]
 
 
 # Application definition
@@ -119,7 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / '/static',
+    os.path.join(BASE_DIR, 'eduapp', 'static'),  # Правильный формат пути
 ]
 
 # Куда собирать все static-файлы при collectstatic
